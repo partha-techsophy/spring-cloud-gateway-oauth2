@@ -1,22 +1,20 @@
 package com.example.demo;
 
-//@Configuration
-////@EnableWebSecurity
-//@EnableWebFluxSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//public class SecurityConfig extends WebSecurityConfigurerAdapter {
-public class SecurityConfig {
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
-//                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
-//    }
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Bean
-//    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-//        http.authorizeExchange(exchanges -> exchanges.anyExchange().authenticated())
-//                .oauth2ResourceServer().jwt();
-//        return http.build();
-//    }
+    protected void configure(HttpSecurity http) throws Exception {
+        http.authorizeRequests(authorize -> authorize.anyRequest().authenticated())
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
+    }
 
 }
