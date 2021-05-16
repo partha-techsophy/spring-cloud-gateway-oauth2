@@ -1,6 +1,6 @@
 # Springcloud gateway with OAuth2 integration
 
-In this sample project we will learn 
+This project demonestartes the following 
 
 * How to secure services using OAuth2
 * How to configure gateway
