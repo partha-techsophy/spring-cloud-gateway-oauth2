@@ -8,7 +8,7 @@ This project demonstrates the following
 
 ## Project details
 We will create 3 projects as listed bellow
-* API Gateway - Route all incoming traffics
+* API Gateway - Route all incoming traffics and secure all backend services.
 * Service-1 - A `hello` service and an `internal-call` service which will call service-2 (Servive-to-Service call)
 * Service-2 - A `hello` service
 
