@@ -1,0 +1,18 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: service-2
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://10.96.49.151:7000/auth/realms/demo-realm
+
+management:
+  endpoints:
+    health:
+      enabled: true
+    web:
+      exposure:
+        include: "*"

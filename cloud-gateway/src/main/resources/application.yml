@@ -1,0 +1,47 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    kubernetes:
+      discovery:
+        all-namespaces: true
+    gateway:
+      default-filters:
+        - TokenRelay
+      routes:
+        - id: route-1
+          uri: http://service-1:8080/
+          predicates:
+            - Path=/service-1/**
+        - id: route-2
+          uri: http://service-2:8080/
+          predicates:
+            - Path=/service-2/**
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            token-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/token
+            authorization-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/auth
+            userinfo-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+        registration:
+          springcloud-scope:
+            provider: keycloak
+            client-id: springcloud
+            client-secret: 246db45d-7c06-4390-9dba-265e5389bf1b
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
