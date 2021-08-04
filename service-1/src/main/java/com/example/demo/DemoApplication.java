@@ -27,16 +27,16 @@ public class DemoApplication {
 
 
 	private ExchangeFilterFunction logRequest() {
-		return ExchangeFilterFunction.ofRequestProcessor(clinetRequest -> {
-			System.out.println("Request "+ clinetRequest.method() +" : " + clinetRequest.url());
-			return Mono.just(clinetRequest);
+		return ExchangeFilterFunction.ofRequestProcessor(clientRequest -> {
+			System.out.println("Request "+ clientRequest.method() +" : " + clientRequest.url());
+			return Mono.just(clientRequest);
 		});
 	}
 
 	private ExchangeFilterFunction logResponse() {
-		return ExchangeFilterFunction.ofResponseProcessor(clinetResponse -> {
-			System.out.println("Response status code {} " + clinetResponse.statusCode());
-			return Mono.just(clinetResponse);
+		return ExchangeFilterFunction.ofResponseProcessor(clientResponse -> {
+			System.out.println("Response status code {} " + clientResponse.statusCode());
+			return Mono.just(clientResponse);
 		});
 	}
 }

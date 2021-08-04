@@ -11,7 +11,13 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://10.96.49.151:7000/auth/realms/demo-realm
+          issuer-uri: https://www.smarteye.health/auth/realms/dev-realm
+
+logging.level:
+  org.springframework.cloud.gateway: DEBUG
+  org.springframework.security: DEBUG
+  org.springframework.web.reactive.function.client: TRACE
+  org.springframework.security.oauth2: DEBUG
 
 management:
   endpoints:

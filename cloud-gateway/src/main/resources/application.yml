@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: cloud-gateway
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     kubernetes:
       discovery:
@@ -10,6 +12,7 @@ spring:
     gateway:
       default-filters:
         - TokenRelay
+        - RemoveRequestHeader=Cookie
       routes:
         - id: route-1
           uri: http://service-1:8080/
@@ -21,20 +24,30 @@ spring:
             - Path=/service-2/**
   security:
     oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://www.smarteye.health/auth/realms/dev-realm
       client:
         provider:
           keycloak:
-            token-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/token
-            authorization-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/auth
-            userinfo-uri: http://10.96.49.151:7000/auth/realms/demo-realm/protocol/openid-connect/userinfo
+            token-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/token
+            authorization-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/auth
+            userinfo-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/userinfo
+            jwk-set-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/certs
             user-name-attribute: preferred_username
         registration:
           springcloud-scope:
             provider: keycloak
-            client-id: springcloud
-            client-secret: 246db45d-7c06-4390-9dba-265e5389bf1b
+            client-id: smarteye-service
+            client-secret: 58b58181-fe6d-4582-b8f5-451cf9fe616c
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
+
+logging.level:
+  org.springframework.cloud.gateway: DEBUG
+  org.springframework.security: DEBUG
+  org.springframework.web.reactive.function.client: TRACE
+  org.springframework.security.oauth2: DEBUG
 
 management:
   endpoints:
