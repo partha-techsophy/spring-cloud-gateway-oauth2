@@ -30,16 +30,16 @@ spring:
       client:
         provider:
           keycloak:
-            token-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/token
-            authorization-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/auth
-            userinfo-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/userinfo
-            jwk-set-uri: https://www.smarteye.health/auth/realms/dev-realm/protocol/openid-connect/certs
+            token-uri: https://<HOST>/auth/realms/dev-realm/protocol/openid-connect/token
+            authorization-uri: https://<HOST>/auth/realms/dev-realm/protocol/openid-connect/auth
+            userinfo-uri: https://<HOST>/auth/realms/dev-realm/protocol/openid-connect/userinfo
+            jwk-set-uri: https://<HOST>/auth/realms/dev-realm/protocol/openid-connect/certs
             user-name-attribute: preferred_username
         registration:
           springcloud-scope:
             provider: keycloak
-            client-id: smarteye-service
-            client-secret: 58b58181-fe6d-4582-b8f5-451cf9fe616c
+            client-id: <client-id>
+            client-secret: <secret>
             authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
 
